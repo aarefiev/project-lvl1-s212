@@ -22,12 +22,14 @@
     "url": "https://github.com/aarefiev/project-lvl1-s212/issues"
   },
   "homepage": "https://github.com/aarefiev/project-lvl1-s212#readme",
+  "dependencies": {
+    "readline-sync": "*"
+  },
   "devDependencies": {
     "babel-cli": "*",
     "babel-core": "*",
     "babel-preset-env": "*",
     "babel-preset-stage-0": "*",
-    "readline-sync": "*",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
