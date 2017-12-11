@@ -1,0 +1,19 @@
+{
+  "name": "brain-games",
+  "version": "1.0.0",
+  "description": "Brain games project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aarefiev/project-lvl1-s212.git"
+  },
+  "author": "Artem Arefiev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aarefiev/project-lvl1-s212/issues"
+  },
+  "homepage": "https://github.com/aarefiev/project-lvl1-s212#readme"
+}
