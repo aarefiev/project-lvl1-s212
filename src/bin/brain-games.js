@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 
-import getUserName from '..';
+import game from '../games/main';
 
-console.log('Welcome to the Brain Games!\n');
-
-const userName = getUserName();
-
-console.log(`Hello, ${userName}`);
+// run
+game();
