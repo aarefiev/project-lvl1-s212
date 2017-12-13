@@ -1,4 +1,5 @@
 import { config, game } from '..';
+import QuestionGenerator from '../question_generator/question_generator';
 
 const getRandomNumber = () => Math.floor(Math.random() * 10) + 1;
 const getRandomOperation = (ops = ['add', 'div', 'multiply']) => {
@@ -68,7 +69,11 @@ const generateEquation = () => {
 
 config.name = 'brain-calc';
 config.task = 'What is the result of the expression?';
-config.getQuestion = () => generateEquation();
-config.getAnswer = question => String(question.calculate());
+config.questionGenerator = () => {
+  const question = generateEquation();
+  const answer = String(question.calculate());
+
+  return new QuestionGenerator(question, answer);
+};
 
 export default game;
