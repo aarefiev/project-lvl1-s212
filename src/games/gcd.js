@@ -47,7 +47,7 @@ config.task = 'Find the greatest common divisor of given numbers.';
 config.questionGenerator = () => {
   const numbers = generateNumbers();
 
-  return new QuestionGenerator(numbers, String(question.calculate()));
+  return new QuestionGenerator(numbers, String(numbers.calculate()));
 };
 
 export default game;

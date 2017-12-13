@@ -72,7 +72,7 @@ config.task = 'What is the result of the expression?';
 config.questionGenerator = () => {
   const equation = generateEquation();
 
-  return new QuestionGenerator(equation, String(question.calculate()));
+  return new QuestionGenerator(equation, String(equation.calculate()));
 };
 
 export default game;
