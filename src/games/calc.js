@@ -9,6 +9,46 @@ const getRandomOperation = (ops = ['add', 'div', 'multiply']) => {
   return ops[Math.floor(Math.random() * ops.length)];
 };
 
+const equationToString = (numbers, operation) => {
+  const operationsAlphabet = {
+    add: '+',
+    div: '-',
+    multiply: '*',
+  };
+  const operationSign = operationsAlphabet[operation];
+  const iter = (numbers, acc) => {
+    const current = numbers[acc];
+    const newAcc = acc + 1;
+
+    if (typeof numbers[newAcc] === 'undefined') {
+      return `${current}`;
+    }
+
+    return `${current} ${operationSign} ${iter(numbers, newAcc)}`;
+  };
+
+  return iter(numbers, 0);
+};
+const calculateEquation = (numbers, operation) => {
+  const iter = (numbers, acc) => {
+    const current = numbers[acc];
+    const newAcc = acc + 1;
+
+    if (typeof numbers[newAcc] === 'undefined') {
+      return current;
+    }
+
+    if (operation === 'add') {
+      return current + iter(numbers, newAcc);
+    } else if (operation === 'div') {
+      return current - iter(numbers, newAcc);
+    }
+
+    return current * iter(numbers, newAcc);
+  };
+
+  return iter(numbers, 0);
+};
 const generateEquation = () => {
   function Equation() {
     this.numbers = [getRandomNumber(), getRandomNumber()];
@@ -17,44 +57,10 @@ const generateEquation = () => {
     return this;
   }
   Equation.prototype.toString = function () {
-    const operationsAlphabet = {
-      add: '+',
-      div: '-',
-      multiply: '*',
-    };
-    const operationSign = operationsAlphabet[this.operation];
-    const iter = (numbers, acc) => {
-      const current = numbers[acc];
-      const newAcc = acc + 1;
-
-      if (typeof numbers[newAcc] === 'undefined') {
-        return `${current}`;
-      }
-
-      return `${current} ${operationSign} ${iter(numbers, newAcc)}`;
-    };
-
-    return iter(this.numbers, 0);
+    return equationToString(this.numbers, this.operation);
   };
   Equation.prototype.calculate = function () {
-    const iter = (numbers, acc) => {
-      const current = numbers[acc];
-      const newAcc = acc + 1;
-
-      if (typeof numbers[newAcc] === 'undefined') {
-        return current;
-      }
-
-      if (this.operation === 'add') {
-        return current + iter(numbers, newAcc);
-      } else if (this.operation === 'div') {
-        return current - iter(numbers, newAcc);
-      }
-
-      return current * iter(numbers, newAcc);
-    };
-
-    return iter(this.numbers, 0);
+    return calculateEquation(this.numbers, this.operation);
   };
 
   return new Equation();

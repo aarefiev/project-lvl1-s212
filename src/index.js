@@ -1,7 +1,13 @@
 import readlineSync from 'readline-sync';
 
 const getUserAnswer = answer => readlineSync.question(answer);
-const printMessage = message => console.log(message);
+const printMessage = message => {
+  if (message.length === 0) {
+    return false;
+  }
+
+  return console.log(message);
+};
 
 const config = {
   name: 'game',
@@ -12,40 +18,40 @@ const config = {
 };
 
 // Game
-const game = () => {
+const game = () => { 0
   printMessage('\nWelcome to the Brain Games!');
-
-  if (config.task.length !== 0) {
-    printMessage(`${config.task}`);
-  }
+  printMessage(`${config.task}`);
 
   const userName = getUserAnswer('\nMay I have your name? ');
 
   printMessage(`Hello, ${userName}!\n`);
 
-  if (config.getQuestion !== null) {
-    let attemptNumber = 0;
+  if (config.getQuestion === null) { 1
+    return false;
+  }
 
-    while (attemptNumber < config.attemptsNumber) {
-      const question = config.getQuestion();
-      const answer = config.getAnswer(question);
+  let attemptNumber = 0;
 
-      printMessage(`Question: ${question}`);
+  while (attemptNumber < config.attemptsNumber) { 1
+    const question = config.getQuestion();
+    const answer = config.getAnswer(question);
 
-      const userAnswer = getUserAnswer('Your answer: ');
+    printMessage(`Question: ${question}`);
 
-      if (userAnswer !== answer) {
-        printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${answer}'. \nLet's try again, ${userName}!`);
-        break;
-      }
+    const userAnswer = getUserAnswer('Your answer: ');
 
-      printMessage('Correct!');
-      attemptNumber += 1;
+    if (userAnswer !== answer) { 2
+      printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${answer}'. \nLet's try again, ${userName}!`);
+      break;
+      return true;
     }
 
-    if (attemptNumber === config.attemptsNumber) {
-      printMessage(`Congratulations, ${userName}!`);
-    }
+    printMessage('Correct!');
+    attemptNumber += 1;
+  }
+
+  if (attemptNumber === config.attemptsNumber) { 1
+    printMessage(`Congratulations, ${userName}!`);
   }
 
   return true;
