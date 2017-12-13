@@ -16,35 +16,35 @@ const equationToString = (numbers, operation) => {
     multiply: '*',
   };
   const operationSign = operationsAlphabet[operation];
-  const iter = (numbers, acc) => {
-    const current = numbers[acc];
+  const iter = (iterNumbers, acc) => {
+    const current = iterNumbers[acc];
     const newAcc = acc + 1;
 
-    if (typeof numbers[newAcc] === 'undefined') {
+    if (typeof iterNumbers[newAcc] === 'undefined') {
       return `${current}`;
     }
 
-    return `${current} ${operationSign} ${iter(numbers, newAcc)}`;
+    return `${current} ${operationSign} ${iter(iterNumbers, newAcc)}`;
   };
 
   return iter(numbers, 0);
 };
 const calculateEquation = (numbers, operation) => {
-  const iter = (numbers, acc) => {
+  const iter = (iterNumbers, acc) => {
     const current = numbers[acc];
     const newAcc = acc + 1;
 
-    if (typeof numbers[newAcc] === 'undefined') {
+    if (typeof iterNumbers[newAcc] === 'undefined') {
       return current;
     }
 
     if (operation === 'add') {
-      return current + iter(numbers, newAcc);
+      return current + iter(iterNumbers, newAcc);
     } else if (operation === 'div') {
-      return current - iter(numbers, newAcc);
+      return current - iter(iterNumbers, newAcc);
     }
 
-    return current * iter(numbers, newAcc);
+    return current * iter(iterNumbers, newAcc);
   };
 
   return iter(numbers, 0);

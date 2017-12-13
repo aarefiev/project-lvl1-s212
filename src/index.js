@@ -1,7 +1,7 @@
 import readlineSync from 'readline-sync';
 
 const getUserAnswer = answer => readlineSync.question(answer);
-const printMessage = message => {
+const printMessage = (message) => {
   if (message.length === 0) {
     return false;
   }
@@ -18,7 +18,7 @@ const config = {
 };
 
 // Game
-const game = () => { 0
+const game = () => {
   printMessage('\nWelcome to the Brain Games!');
   printMessage(`${config.task}`);
 
@@ -26,13 +26,13 @@ const game = () => { 0
 
   printMessage(`Hello, ${userName}!\n`);
 
-  if (config.getQuestion === null) { 1
+  if (config.getQuestion === null) {
     return false;
   }
 
   let attemptNumber = 0;
 
-  while (attemptNumber < config.attemptsNumber) { 1
+  while (attemptNumber < config.attemptsNumber) {
     const question = config.getQuestion();
     const answer = config.getAnswer(question);
 
@@ -40,17 +40,16 @@ const game = () => { 0
 
     const userAnswer = getUserAnswer('Your answer: ');
 
-    if (userAnswer !== answer) { 2
+    if (userAnswer !== answer) {
       printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${answer}'. \nLet's try again, ${userName}!`);
       break;
-      return true;
     }
 
     printMessage('Correct!');
     attemptNumber += 1;
   }
 
-  if (attemptNumber === config.attemptsNumber) { 1
+  if (attemptNumber === config.attemptsNumber) {
     printMessage(`Congratulations, ${userName}!`);
   }
 
