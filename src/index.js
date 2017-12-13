@@ -13,8 +13,7 @@ const config = {
   name: 'game',
   task: '',
   attemptsNumber: 3,
-  getQuestion: null,
-  getAnswer: null,
+  questionGenerator: () => {},
 };
 
 // Game
@@ -26,22 +25,17 @@ const game = () => {
 
   printMessage(`Hello, ${userName}!\n`);
 
-  if (config.getQuestion === null) {
-    return false;
-  }
-
   let attemptNumber = 0;
 
   while (attemptNumber < config.attemptsNumber) {
-    const question = config.getQuestion();
-    const answer = config.getAnswer(question);
+    const questionData = config.questionGenerator();
 
-    printMessage(`Question: ${question}`);
+    printMessage(`Question: ${questionData.question}`);
 
     const userAnswer = getUserAnswer('Your answer: ');
 
-    if (userAnswer !== answer) {
-      printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${answer}'. \nLet's try again, ${userName}!`);
+    if (userAnswer !== questionData.answer) {
+      printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${questionData.answer}'. \nLet's try again, ${userName}!`);
       break;
     }
 
