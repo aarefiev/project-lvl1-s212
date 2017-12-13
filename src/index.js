@@ -52,9 +52,9 @@ const game = () => {
 
   printMessage(`Hello, ${userName}!\n`);
 
-  let attemptNumber = 1;
+  let attemptNumber = 0;
 
-  while (attemptNumber <= config.attemptsNumber) {
+  while (attemptNumber < config.attemptsNumber) {
     const question = config.getQuestion();
     const answer = config.getAnswer(question);
 
@@ -71,7 +71,10 @@ const game = () => {
     attemptNumber += 1;
   }
 
-  printMessage(`Congratulations, ${userName}!`);
+  if (attemptNumber === config.attemptsNumber) {
+    printMessage(`Congratulations, ${userName}!`);
+  }
+
   return;
 }
 
