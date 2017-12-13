@@ -9,13 +9,6 @@ const printMessage = (message) => {
   return console.log(message);
 };
 
-const config = {
-  name: 'game',
-  task: '',
-  attemptsNumber: 3,
-  questionGenerator: () => {},
-};
-
 // welcomeGame
 const welcomeGame = () => {
   printMessage('\nWelcome to the Brain Games!');
@@ -27,9 +20,9 @@ const welcomeGame = () => {
 };
 
 // Game
-const game = () => {
+const game = (task, questionGenerator, attemptsNumber = 3) => {
   printMessage('\nWelcome to the Brain Games!');
-  printMessage(`${config.task}`);
+  printMessage(`${task}`);
 
   const userName = getUserAnswer('\nMay I have your name? ');
 
@@ -37,8 +30,8 @@ const game = () => {
 
   let attemptNumber = 0;
 
-  while (attemptNumber < config.attemptsNumber) {
-    const questionData = config.questionGenerator();
+  while (attemptNumber < attemptsNumber) {
+    const questionData = questionGenerator();
 
     printMessage(`Question: ${questionData.question}`);
 
@@ -53,11 +46,11 @@ const game = () => {
     attemptNumber += 1;
   }
 
-  if (attemptNumber === config.attemptsNumber) {
+  if (attemptNumber === attemptsNumber) {
     printMessage(`Congratulations, ${userName}!`);
   }
 
   return true;
 };
 
-export { config, game, welcomeGame };
+export { game, welcomeGame };
