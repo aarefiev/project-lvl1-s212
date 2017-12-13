@@ -1,4 +1,4 @@
-import { config, game } from '..';
+import { game } from '..';
 import QuestionGenerator from '../question_generator/question_generator';
 
 const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
@@ -42,12 +42,16 @@ const generateNumbers = () => {
   return new Numbers();
 };
 
-config.name = 'brain-gcd';
-config.task = 'Find the greatest common divisor of given numbers.';
-config.questionGenerator = () => {
-  const numbers = generateNumbers();
+// gcdGame
+const gcdGame = () => {
+  const task = 'Find the greatest common divisor of given numbers.';
+  const questionGenerator = () => {
+    const numbers = generateNumbers();
 
-  return new QuestionGenerator(numbers, String(numbers.calculate()));
+    return new QuestionGenerator(numbers, String(numbers.calculate()));
+  };
+
+  return game(task, questionGenerator);
 };
 
-export default game;
+export default gcdGame;
