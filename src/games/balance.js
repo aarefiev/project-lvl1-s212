@@ -37,7 +37,7 @@ const balanceGame = () => {
   const questionGenerator = () => {
     const number = getRandomNumber();
 
-    return new QuestionGenerator(number, balanceNumber(number));
+    return new QuestionGenerator(number, String(balanceNumber(number)));
   };
 
   return game(task, questionGenerator);
