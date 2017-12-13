@@ -15,8 +15,8 @@ const generateEquation = () => {
     this.operation = getRandomOperation();
 
     return this;
-  };
-  Equation.prototype.toString = function() {
+  }
+  Equation.prototype.toString = function () {
     const operationsAlphabet = {
       add: '+',
       div: '-',
@@ -36,7 +36,7 @@ const generateEquation = () => {
 
     return iter(this.numbers, 0);
   };
-  Equation.prototype.calculate = function() {
+  Equation.prototype.calculate = function () {
     const iter = (numbers, acc) => {
       const current = numbers[acc];
       const newAcc = acc + 1;
@@ -63,6 +63,6 @@ const generateEquation = () => {
 config.name = 'brain-calc';
 config.task = 'What is the result of the expression?';
 config.getQuestion = () => generateEquation();
-config.getAnswer = (question) => String(question.calculate());
+config.getAnswer = question => String(question.calculate());
 
 export default game;

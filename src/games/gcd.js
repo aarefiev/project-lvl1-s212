@@ -13,8 +13,8 @@ const generateNumbers = () => {
     }
 
     return this;
-  };
-  Numbers.prototype.toString = function() {
+  }
+  Numbers.prototype.toString = function () {
     const iter = (numbers, acc) => {
       const current = numbers[acc];
       const newAcc = acc + 1;
@@ -28,7 +28,7 @@ const generateNumbers = () => {
 
     return iter(this.numbers, 0);
   };
-  Numbers.prototype.calculate = function() {
+  Numbers.prototype.calculate = function () {
     const iter = (n1, n2) => {
       if (n2 === 0) {
         return n1;
@@ -46,6 +46,6 @@ const generateNumbers = () => {
 config.name = 'brain-gcd';
 config.task = 'Find the greatest common divisor of given numbers.';
 config.getQuestion = () => generateNumbers();
-config.getAnswer = (question) => String(question.calculate());
+config.getAnswer = question => String(question.calculate());
 
 export default game;
