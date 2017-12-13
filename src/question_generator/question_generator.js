@@ -1,6 +1,1 @@
-export default function QuestionGenerator(question, answer) {
-  this.question = question;
-  this.answer = answer;
-
-  return this;
-}
+export default (question, answer) => ({ question, answer });
