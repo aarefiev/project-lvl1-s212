@@ -16,6 +16,16 @@ const config = {
   questionGenerator: () => {},
 };
 
+// welcomeGame
+const welcomeGame = () => {
+  printMessage('\nWelcome to the Brain Games!');
+
+  const userName = getUserAnswer('\nMay I have your name? ');
+
+  printMessage(`Hello, ${userName}!\n`);
+  return true;
+};
+
 // Game
 const game = () => {
   printMessage('\nWelcome to the Brain Games!');
@@ -50,4 +60,4 @@ const game = () => {
   return true;
 };
 
-export { config, game };
+export { config, game, welcomeGame };
