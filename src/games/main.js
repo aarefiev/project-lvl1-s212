@@ -1,8 +1,6 @@
-import { ui } from '..';
+import { config, game } from '..';
 
-const game = () => {
-  ui.printMessage(`${ui.WELCOME_MESSAGE}\n`);
-  ui.printHello(ui.getUserName());
-};
+config.name = 'brain-games';
+config.task = '';
 
 export default game;
