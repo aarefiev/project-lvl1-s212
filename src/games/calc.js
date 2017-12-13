@@ -71,9 +71,8 @@ config.name = 'brain-calc';
 config.task = 'What is the result of the expression?';
 config.questionGenerator = () => {
   const question = generateEquation();
-  const answer = String(question.calculate());
 
-  return new QuestionGenerator(question, answer);
+  return new QuestionGenerator(question, String(question.calculate()));
 };
 
 export default game;
