@@ -70,9 +70,9 @@ const generateEquation = () => {
 config.name = 'brain-calc';
 config.task = 'What is the result of the expression?';
 config.questionGenerator = () => {
-  const question = generateEquation();
+  const equation = generateEquation();
 
-  return new QuestionGenerator(question, String(question.calculate()));
+  return new QuestionGenerator(equation, String(question.calculate()));
 };
 
 export default game;
