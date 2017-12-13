@@ -4,7 +4,7 @@ const isEvenNumber = (num) => ((Number.isInteger(num) && num % 2 === 0) ? 'yes' 
 const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
 
 config.name = 'brain-even';
-config.task = 'What is the result of the expression?';
+config.task = 'Answer "yes" if number even otherwise answer "no".';
 config.getQuestion = () => getRandomNumber();
 config.getAnswer = (question) => isEvenNumber(question);
 
