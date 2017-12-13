@@ -1,6 +1,3 @@
-import { config, game } from '..';
+import { welcomeGame } from '..';
 
-config.name = 'brain-games';
-config.task = '';
-
-export default game;
+export default welcomeGame;
