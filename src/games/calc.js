@@ -2,12 +2,10 @@ import { game } from '..';
 import QuestionGenerator from '../question_generator/question_generator';
 
 const getRandomNumber = () => Math.floor(Math.random() * 10) + 1;
-const getRandomOperation = (ops = ['add', 'div', 'multiply']) => {
-  if (!(ops instanceof Array) && ops.length === 0) {
-    return false;
-  }
+const getRandomOperation = () => {
+  const operations = ['add', 'div', 'multiply'];
 
-  return ops[Math.floor(Math.random() * ops.length)];
+  return operations[Math.floor(Math.random() * operations.length)];
 };
 
 const equationToString = (equation) => {
@@ -17,25 +15,15 @@ const equationToString = (equation) => {
     multiply: '*',
   };
   const operationSign = operationsAlphabet[equation.operation];
-  const iter = (iterNumbers, acc) => {
-    const current = iterNumbers[acc];
-    const newAcc = acc + 1;
 
-    if (typeof iterNumbers[newAcc] === 'undefined') {
-      return `${current}`;
-    }
-
-    return `${current} ${operationSign} ${iter(iterNumbers, newAcc)}`;
-  };
-
-  return iter(equation.numbers, 0);
+  return equation.numbers.join(` ${operationSign} `);
 };
 const calculateEquation = (equation) => {
   const iter = (iterNumbers, acc) => {
     const current = iterNumbers[acc];
     const newAcc = acc + 1;
 
-    if (typeof iterNumbers[newAcc] === 'undefined') {
+    if (newAcc > iterNumbers.length - 1) {
       return current;
     }
 
