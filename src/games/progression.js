@@ -18,8 +18,8 @@ const progressionGenerator = () => {
   return progression;
 };
 
-// gcdGame
-const gcdGame = () => {
+// progressionGame
+const progressionGame = () => {
   const task = 'What number is missing in this progression?';
   const questionGenerator = () => {
     const progression = progressionGenerator();
@@ -35,4 +35,4 @@ const gcdGame = () => {
   return game(task, questionGenerator);
 };
 
-export default gcdGame;
+export default progressionGame;
