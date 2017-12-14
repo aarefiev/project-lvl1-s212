@@ -10,13 +10,13 @@ const getRandomOperation = (ops = ['add', 'div', 'multiply']) => {
   return ops[Math.floor(Math.random() * ops.length)];
 };
 
-const equationToString = (numbers, operation) => {
+const equationToString = (equation) => {
   const operationsAlphabet = {
     add: '+',
     div: '-',
     multiply: '*',
   };
-  const operationSign = operationsAlphabet[operation];
+  const operationSign = operationsAlphabet[equation.operation];
   const iter = (iterNumbers, acc) => {
     const current = iterNumbers[acc];
     const newAcc = acc + 1;
@@ -28,52 +28,44 @@ const equationToString = (numbers, operation) => {
     return `${current} ${operationSign} ${iter(iterNumbers, newAcc)}`;
   };
 
-  return iter(numbers, 0);
+  return iter(equation.numbers, 0);
 };
-const calculateEquation = (numbers, operation) => {
+const calculateEquation = (equation) => {
   const iter = (iterNumbers, acc) => {
-    const current = numbers[acc];
+    const current = iterNumbers[acc];
     const newAcc = acc + 1;
 
     if (typeof iterNumbers[newAcc] === 'undefined') {
       return current;
     }
 
-    if (operation === 'add') {
+    if (equation.operation === 'add') {
       return current + iter(iterNumbers, newAcc);
-    } else if (operation === 'div') {
+    } else if (equation.operation === 'div') {
       return current - iter(iterNumbers, newAcc);
     }
 
     return current * iter(iterNumbers, newAcc);
   };
 
-  return iter(numbers, 0);
+  return iter(equation.numbers, 0);
 };
-const generateEquation = () => {
-  function Equation() {
-    this.numbers = [getRandomNumber(), getRandomNumber()];
-    this.operation = getRandomOperation();
+const equationGenerator = () => {
+  const numbers = [getRandomNumber(), getRandomNumber()];
+  const operation = getRandomOperation();
 
-    return this;
-  }
-  Equation.prototype.toString = function () {
-    return equationToString(this.numbers, this.operation);
-  };
-  Equation.prototype.calculate = function () {
-    return calculateEquation(this.numbers, this.operation);
-  };
-
-  return new Equation();
+  return { numbers, operation };
 };
 
 // calcGame
 const calcGame = () => {
   const task = 'What is the result of the expression?';
   const questionGenerator = () => {
-    const equation = generateEquation();
+    const equation = equationGenerator();
+    const question = equationToString(equation);
+    const answer = String(calculateEquation(equation));
 
-    return new QuestionGenerator(equation, String(equation.calculate()));
+    return new QuestionGenerator(question, answer);
   };
 
   return game(task, questionGenerator);
