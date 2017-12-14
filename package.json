@@ -1,6 +1,6 @@
 {
   "name": "brain-games-aarefiev",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Brain games project",
   "main": "dist/index.js",
   "bin": {
