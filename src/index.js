@@ -1,6 +1,6 @@
 import readlineSync from 'readline-sync';
 
-const getUserAnswer = answer => readlineSync.question(answer);
+const getUserAnswer = question => readlineSync.question(question);
 const printMessage = (message) => {
   if (message.length === 0) {
     return false;
