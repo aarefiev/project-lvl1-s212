@@ -3,7 +3,7 @@ import QuestionGenerator from '../question_generator/question_generator';
 
 const getRandomNumber = () => Math.floor(Math.random() * 10) + 1;
 const getRandomOperation = () => {
-  const operations = ['add', 'div', 'multiply'];
+  const operations = ['add', 'sub', 'mult'];
 
   return operations[Math.floor(Math.random() * operations.length)];
 };
@@ -11,8 +11,8 @@ const getRandomOperation = () => {
 const equationToString = (equation) => {
   const operationsAlphabet = {
     add: '+',
-    div: '-',
-    multiply: '*',
+    sub: '-',
+    mult: '*',
   };
   const operationSign = operationsAlphabet[equation.operation];
 
@@ -29,7 +29,7 @@ const calculateEquation = (equation) => {
 
     if (equation.operation === 'add') {
       return current + iter(iterNumbers, newAcc);
-    } else if (equation.operation === 'div') {
+    } else if (equation.operation === 'sub') {
       return current - iter(iterNumbers, newAcc);
     }
 
