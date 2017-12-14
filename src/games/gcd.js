@@ -2,16 +2,7 @@ import { game } from '..';
 import QuestionGenerator from '../question_generator/question_generator';
 
 const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
-const numbersToString = (numbers, acc) => {
-  const current = numbers[acc];
-  const newAcc = acc + 1;
-
-  if (typeof numbers[newAcc] === 'undefined') {
-    return `${current}`;
-  }
-
-  return `${current} ${numbersToString(numbers, newAcc)}`;
-};
+const numbersToString = numbers => numbers.join(' ');
 const calculateGCD = (num1, num2) => {
   if (num2 === 0) {
     return num1;
@@ -19,36 +10,17 @@ const calculateGCD = (num1, num2) => {
 
   return calculateGCD(num2, num1 % num2);
 };
-const generateNumbers = () => {
-  function Numbers() {
-    const num1 = getRandomNumber();
-    const num2 = getRandomNumber();
-
-    if (num1 > num2) {
-      this.numbers = [num2, num1];
-    } else {
-      this.numbers = [num1, num2];
-    }
-
-    return this;
-  }
-  Numbers.prototype.toString = function () {
-    return numbersToString(this.numbers, 0);
-  };
-  Numbers.prototype.calculate = function () {
-    return calculateGCD(this.numbers[0], this.numbers[1]);
-  };
-
-  return new Numbers();
-};
+const numbersGenerator = () => [getRandomNumber(), getRandomNumber()];
 
 // gcdGame
 const gcdGame = () => {
   const task = 'Find the greatest common divisor of given numbers.';
   const questionGenerator = () => {
-    const numbers = generateNumbers();
+    const numbers = numbersGenerator();
+    const question = numbersToString(numbers);
+    const answer = String(calculateGCD(numbers[0], numbers[1]));
 
-    return new QuestionGenerator(numbers, String(numbers.calculate()));
+    return new QuestionGenerator(question, answer);
   };
 
   return game(task, questionGenerator);
