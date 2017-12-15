@@ -1,7 +1,6 @@
 import { game } from '..';
-import QuestionGenerator from '../question_generator/question_generator';
+import math from '../math/math';
 
-const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
 const calculateGCD = (num1, num2) => {
   if (num2 === 0) {
     return num1;
@@ -13,16 +12,16 @@ const calculateGCD = (num1, num2) => {
 // gcdGame
 const gcdGame = () => {
   const task = 'Find the greatest common divisor of given numbers.';
-  const questionGenerator = () => {
-    const num1 = getRandomNumber();
-    const num2 = getRandomNumber();
+  const getQuestionData = () => {
+    const num1 = math.getRandomNumber();
+    const num2 = math.getRandomNumber();
     const question = `${num1} ${num2}`;
     const answer = String(calculateGCD(num1, num2));
 
-    return new QuestionGenerator(question, answer);
+    return { question, answer };
   };
 
-  return game(task, questionGenerator);
+  return game(task, getQuestionData);
 };
 
 export default gcdGame;

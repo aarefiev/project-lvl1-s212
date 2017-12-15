@@ -1,7 +1,6 @@
 import { game } from '..';
-import QuestionGenerator from '../question_generator/question_generator';
+import math from '../math/math';
 
-const getRandomNumber = () => Math.floor(Math.random() * 100) + 1;
 const isPrimeNumber = (number) => {
   const iter = (num, halfNum) => {
     if (halfNum === 0 || num === 1) {
@@ -22,14 +21,14 @@ const getCorrectAnswer = num => (isPrimeNumber(num) ? 'yes' : 'no');
 // primeGame
 const primeGame = () => {
   const task = 'Is this number prime?';
-  const questionGenerator = () => {
-    const question = getRandomNumber();
+  const getQuestionData = () => {
+    const question = math.getRandomNumber();
     const answer = getCorrectAnswer(question);
 
-    return new QuestionGenerator(question, answer);
+    return { question, answer };
   };
 
-  return game(task, questionGenerator);
+  return game(task, getQuestionData);
 };
 
 export default primeGame;

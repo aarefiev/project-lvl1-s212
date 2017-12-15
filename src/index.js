@@ -20,18 +20,18 @@ const welcomeGame = () => {
 };
 
 // Game
-const game = (task, questionGenerator, attemptsNumber = 3) => {
+const game = (task, getQuestionData, maxQuestionsNumber = 3) => {
   printMessage('\nWelcome to the Brain Games!');
   printMessage(`${task}`);
 
   const userName = getUserAnswer('\nMay I have your name? ');
+  const gameAskQuestions = (questionNumber = 1) => {
+    if (questionNumber > maxQuestionsNumber) {
+      printMessage(`Congratulations, ${userName}!`);
+      return true;
+    }
 
-  printMessage(`Hello, ${userName}!\n`);
-
-  let attemptNumber = 0;
-
-  while (attemptNumber < attemptsNumber) {
-    const questionData = questionGenerator();
+    const questionData = getQuestionData();
 
     printMessage(`Question: ${questionData.question}`);
 
@@ -39,16 +39,15 @@ const game = (task, questionGenerator, attemptsNumber = 3) => {
 
     if (userAnswer !== questionData.answer) {
       printMessage(`'${userAnswer}' is wrong answer ;(. Correct answer was '${questionData.answer}'. \nLet's try again, ${userName}!`);
-      break;
+      return false;
     }
 
     printMessage('Correct!');
-    attemptNumber += 1;
-  }
+    return gameAskQuestions(questionNumber + 1);
+  };
 
-  if (attemptNumber === attemptsNumber) {
-    printMessage(`Congratulations, ${userName}!`);
-  }
+  printMessage(`Hello, ${userName}!\n`);
+  gameAskQuestions();
 
   return true;
 };

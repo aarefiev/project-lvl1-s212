@@ -1,7 +1,5 @@
 import { game } from '..';
-import QuestionGenerator from '../question_generator/question_generator';
-
-const getRandomNumber = () => Math.floor(Math.random() * 1000) + 1;
+import math from '../math/math';
 
 const sortNumbers = numbers => numbers.sort((a, b) => a - b);
 const getSortedDigitsOfNumber = num => sortNumbers(`${num}`.split(''));
@@ -34,13 +32,14 @@ const balanceNumber = (num) => {
 // balanceGame
 const balanceGame = () => {
   const task = 'Balance the given number.';
-  const questionGenerator = () => {
-    const number = getRandomNumber();
+  const getQuestionData = () => {
+    const question = math.getRandomNumber(1, 10000);
+    const answer = String(balanceNumber(question));
 
-    return new QuestionGenerator(number, String(balanceNumber(number)));
+    return { question, answer };
   };
 
-  return game(task, questionGenerator);
+  return game(task, getQuestionData);
 };
 
 export default balanceGame;

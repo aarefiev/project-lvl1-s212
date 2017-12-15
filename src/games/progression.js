@@ -1,38 +1,41 @@
 import { game } from '..';
-import QuestionGenerator from '../question_generator/question_generator';
+import math from '../math/math';
 
-const getRandomNumber = (min = 1, max = 100) => Math.floor(Math.random() * max) + min;
 const progressionGenerator = () => {
   const length = 10;
-  const startFrom = getRandomNumber(1, 100);
-  const dNumber = getRandomNumber(1, 5);
+  const startFrom = math.getRandomNumber(1, 100);
+  const dNumber = math.getRandomNumber(1, 5);
+  const resultProgression = [];
 
-  const progression = [];
-  let acc = 1;
+  const fillProgression = (progression, start, acc = 0) => {
+    const newStart = start + dNumber;
+    progression.push(newStart);
 
-  while (acc <= length) {
-    progression.push(startFrom + (dNumber * acc));
-    acc += 1;
-  }
+    if (acc === length - 1) {
+      return progression;
+    }
 
-  return progression;
+    return fillProgression(progression, newStart, acc + 1);
+  };
+
+  return fillProgression(resultProgression, startFrom, 0);
 };
 
 // progressionGame
 const progressionGame = () => {
   const task = 'What number is missing in this progression?';
-  const questionGenerator = () => {
+  const getQuestionData = () => {
     const progression = progressionGenerator();
-    const progressionHiddenItemIndex = getRandomNumber(0, progression.length - 1);
+    const progressionHiddenItemIndex = math.getRandomNumber(0, progression.length - 1);
     const answer = String(progression[progressionHiddenItemIndex]);
     progression[progressionHiddenItemIndex] = '..';
 
     const question = progression.join(' ');
 
-    return new QuestionGenerator(question, answer);
+    return { question, answer };
   };
 
-  return game(task, questionGenerator);
+  return game(task, getQuestionData);
 };
 
 export default progressionGame;
